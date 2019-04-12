@@ -23,16 +23,16 @@ Lets choose **Concert This**.  As soon as you select "Concert This" this you wil
 ![concert this](assets/images/screen3.png)
 
 Lets choose **Spotify this song**.  As soon as you select "Spotify this song" this you will be prompted to enter a song name.  If you choose nothing it will default to Biking by Frank Ocean.  Once a song is chosen it opens up a spotify window, console logs the artist, song name, preview link, and album.  It will also log your search activity to log.txt.
-![concert this](assets/images/screen5)
-![concert this](assets/images/screen6)
+![Spotify this song](assets/images/screen5.png)
+![Spotify this song](assets/images/screen6.png)
 
 Lets choose **Movie this**.  As soon as you select "Movie This" this you will be prompted to enter a movie name.  If you choose nothing it will default to Mr. Nobody.  Once a movie is chosen it console logs the movie's title, release date, imdb rating, rotten tomato rating, country produced in, main language, plot, and actors. It will also log your search activity to log.txt.
-![concert this](assets/images/screen10)
-![concert this](assets/images/screen11)
+![Movie this](assets/images/screen10.png)
+![Movie this](assets/images/screen11.png)
 
 Lets choose **Do What It Says**.  As soon as you select "Do What it says" Liri will read the random.txt file and search for commands.  If it finds a command it will run the next criteria as the search.  Liri will continue to run any and every command in the random.txt file.  It will also log your search activity to log.txt.
-![concert this](assets/images/screen15)
-![concert this](assets/images/screen16)
-![concert this](assets/images/screen17)
-![concert this](assets/images/screen19)
+![Do What It Says](assets/images/screen15.png)
+![Do What It Says](assets/images/screen16.png)
+![Do What It Says](assets/images/screen17.png)
+![Do What It Says](assets/images/screen19.png)
 
