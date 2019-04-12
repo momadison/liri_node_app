@@ -16,6 +16,4 @@ This project is contributed to and maintained by **Matthew Madison**
 ## WALKTHROUGH
 
 Liri opens up with a basic prompt asking you what you want to do.
-
-![picture 1](/Users/Obadiah/Code/liri_node_app/assets/images/screen1.png)
-![picture 2](screen1.png)
+![picture 2](assets/images/screen1.png)
