@@ -11,11 +11,14 @@ const opn = require('opn');
 
 //OMDB request function
 function queryOmdb (search) {
+    console.log("http://www.omdbapi.com/?t="+search+"&y=&plot=short&apikey=" +keys.omdb);
+    key = JSON.stringify(keys.omdb).split('"');
     if (search === "") {
         search = "Mr. Nobody.";
     }
-    axios.get("http://www.omdbapi.com/?t="+search+"&y=&plot=short&apikey=trilogy").then(
+    axios.get("http://www.omdbapi.com/?t="+search+"&y=&plot=short&apikey=" + key[3]).then(
         function(response) {
+
 
             console.log('\n***************************************\n');
             console.log("The movie's title is: " + response.data.Title);
@@ -27,7 +30,9 @@ function queryOmdb (search) {
             console.log("The plot of the movie is: " + response.data.Plot);
             console.log("The movie's actor's are: " + response.data.Actors);
             console.log('\n****************************************\n');
-            return response;
+            
+            let rightNow = moment().format("MMMM Do YYYY, h:mm:ss a")
+            fs.appendFile("log.txt","\n" + rightNow + "\nOMDB Search - "+ search ,  function(err) {if(err){return console.log(err)}});
         }
     );
 }
@@ -48,14 +53,20 @@ function querySpotify (search) {
       console.log("Preview Link: ", data.tracks.items[0].preview_url);
       console.log("Album: ", data.tracks.items[0].album.name);
       console.log('\n---------------------------------------------------\n');
-    //   opn(data.tracks.items[0].uri);
+
+      let rightNow = moment().format("MMMM Do YYYY, h:mm:ss a")
+            fs.appendFile("log.txt","\n" + rightNow + "\nSpotify Search - "+ search ,  function(err) {if(err){return console.log(err)}});
+
+      opn(data.tracks.items[0].uri);
     });
       
 }
 
 //Bands in town function
 function queryBands (search) {
-    axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp").then(
+    console.log(keys.bands);
+    if (search === ""){search = "Maroon5"}
+    axios.get("https://rest.bandsintown.com/artists/" + search + "/events?app_id="+ keys.bands).then(
         function(response) {
             console.log("\n::::::::::" + search.toUpperCase() + "::::::::::\n");
             for (var i = 0; i < response.data.length; i++) {
@@ -66,6 +77,8 @@ function queryBands (search) {
                 console.log(" ||  " + eventDate + "  || \n");
         }
     });
+    let rightNow = moment().format("MMMM Do YYYY, h:mm:ss a")
+            fs.appendFile("log.txt","\n" + rightNow + "\nBand Search - "+ search ,  function(err) {if(err){return console.log(err)}});
 }
 
 console.log("\n*********************************************************");
@@ -128,22 +141,18 @@ inquirer.prompt([
                     return console.log(error);
                 }
                 let command = data.split(",");
-                for( var i = 0; i < command.length; i ++){ 
-                    console.log(command[i]);
+                for( var i = 0; i < command.length; i += 2){ 
                     
-                    if (command[i] === "spotify-this-song") {
-                        console.log("caught the frog");
-                        // querySpotify(command[i+1]);
+                    if (command[i].trim() === "spotify-this-song") {
+                        querySpotify(command[i+1].trim());
                     }
 
-                    if (command[i] === "concert-this") {
-                        console.log("caught the mouse");
-                        // queryBands(command[i+1]);
+                    else if (command[i].trim() === "concert-this") {
+                        queryBands(command[i+1].trim());
                     }
 
-                    if (command[i] === "movie-this") {
-                        console.log("caught the fly");
-                        // queryOmdb(command[i+1]);
+                    else if (command[i].trim() === "movie-this") {
+                        queryOmdb(command[i+1].trim());
                     }
                     
                 }
